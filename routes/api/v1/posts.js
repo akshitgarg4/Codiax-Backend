@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const postAPI = require("../../../controllers/api/posts_api");
 
-router.use("/v1", require("./v1/index"));
+router.get('/', postAPI.index);
 
 module.exports = router;
