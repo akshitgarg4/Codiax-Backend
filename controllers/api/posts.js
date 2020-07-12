@@ -1,5 +1,7 @@
 const Post = require('../../models/posts');
 
+
+//to create a post
 module.exports.createPost=async function(req,res)
 {
     let post= await Post.create({
@@ -24,12 +26,24 @@ module.exports.createPost=async function(req,res)
 }
 
 
-
-module.exports.getPosts = function(req,res)
+//to receive all the posts
+module.exports.getPosts =function(req,res)
 {
-
-    return res.json(200,{
-        message:"These are the posts",
-        posts:[]
-    });
+    Post.find({}).sort({'createdAt':-1}).populate('user').populate({
+        path:'comments',populate:{path:'user'}
+    }).exec(function(err,posts){
+        if(err)
+        {
+            return res.json(422,{
+                message:"Error in finding posts"
+            });
+        }
+        else{
+            return res.json(200,{
+                message:"These are the posts",
+                posts:posts
+            });
+        }
+    })
+    
 }

@@ -25,7 +25,7 @@ module.exports.signup =async function(req,res)
             message:"Sign up successful",
             success:true,
             data:{
-                token:jwt.sign(user1.toJSON(),'CODIAX',{expiresIn:'1000000'})
+                token:jwt.sign(user1.toJSON(),'CODIAX',{expiresIn:'100000000'})
             }
             });
     }
@@ -52,7 +52,7 @@ module.exports.login =async function(req,res)
         message:"Here is the token",
         success:true,
         data:{
-            token:jwt.sign(user.toJSON(),'CODIAX',{expiresIn:'1000000'}),
+            token:jwt.sign(user.toJSON(),'CODIAX',{expiresIn:'100000000'}),
             user:{
                 email:user.email,
                 name:user.name,
