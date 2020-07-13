@@ -8,8 +8,8 @@ const passport = require("passport");
 router.post('/login', userAPI.login);
 router.post('/signup', userAPI.signup);
 router.post('/edit',passport.authenticate('jwt',{session:false}), userAPI.edit);
-router.post('/:userId',passport.authenticate('jwt',{session:false}), userAPI.profile);
-router.get('/search',passport.authenticate('jwt',{session:false}), userAPI.search);
+router.get('/:userId',passport.authenticate('jwt',{session:false}), userAPI.profile);
+router.get('/search/:text',passport.authenticate('jwt',{session:false}), userAPI.search);
 
 
 

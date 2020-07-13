@@ -29,7 +29,7 @@ module.exports.createPost=async function(req,res)
 //to receive all the posts
 module.exports.getPosts =function(req,res)
 {
-    Post.find({}).sort({'createdAt':-1}).populate('user').populate({
+    Post.find({}).sort({'createdAt':-1}).populate('user',"name email _id").populate({
         path:'comments',populate:{path:'user'}
     }).exec(function(err,posts){
         if(err)
@@ -41,7 +41,10 @@ module.exports.getPosts =function(req,res)
         else{
             return res.json(200,{
                 message:"These are the posts",
-                posts:posts
+                success:true,
+                data:{
+                	posts:posts
+                }
             });
         }
     })

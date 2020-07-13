@@ -20,7 +20,9 @@ module.exports.create =async function(req,res)
         return res.json(200,{
             message:"Friend added",
             success:true,
-            data:finalList
+            data:{
+                friends:finalList
+            }
         });
     
 }
@@ -53,7 +55,25 @@ module.exports.remove =async function(req,res)
         return res.json(200,{
             message:"Friend removed",
             success:true,
-            data:finalList
+            data:{
+                friends:finalList
+            }
+        });
+    
+}
+
+
+//to fetch friends
+module.exports.friends =async function(req,res)
+{
+    let user=await User.findOne({_id:req.params.userId}).populate('friends',"_id email name");
+    
+        return res.json(200,{
+            message:"Friends list",
+            success:true,
+            data:{
+                friends:user.friends
+            }
         });
     
 }

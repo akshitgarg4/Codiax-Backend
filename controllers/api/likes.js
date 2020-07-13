@@ -10,11 +10,12 @@ module.exports.toggleLike =async function(req,res)
     //deleted will be false when we like it 
     // if it was already liked and we removed like from it then deleted would be true
     var deleted=false;
+    const id=req.query.likeable_id;
 
     if(req.query.likeable_type == 'Post')
     {
         var newLikes=[];
-        let post=await Post.findOne({_id:req.query.likeable_id});
+        let post=await Post.findById(id);
         if(post)
         {
             post.likes.forEach(element => {
@@ -42,7 +43,7 @@ module.exports.toggleLike =async function(req,res)
     }
     else{
         var newLikes=[];
-        let comment=await Comment.findOne({_id:req.query.likeable_id});
+        let comment=await Comment.findById(id);
         if(comment)
         {
             comment.likes.forEach(element => {
