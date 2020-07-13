@@ -82,7 +82,6 @@ module.exports.profile = async function (req, res) {
     const id=req.params.userId;
   let user = await User.findById(id);
   if (user) {
-  	console.log("user found");
     return res.json(200, {
       message: "user's Profile is here",
       success: true,
@@ -95,7 +94,6 @@ module.exports.profile = async function (req, res) {
       },
     });
   } else {
-  	console.log("user not found sorry");
 
     return res.json(422, {
       message: "User does not exist",

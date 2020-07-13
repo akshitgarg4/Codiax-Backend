@@ -16,7 +16,6 @@ module.exports.create =async function(req,res)
         let updated = await user1.save();
     }
         let finalList= await User.findOne({_id:req.user._id}).populate('friends',"_id email name");
-        console.log(finalList);
         return res.json(200,{
             message:"Friend added",
             success:true,
